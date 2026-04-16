@@ -1,0 +1,43 @@
+@model CodeFirstEFInAsp.netcoreDemo.Models.Employee
+
+@{
+    ViewData["Title"] = "Delete Crew Member";
+}
+
+<section class="page-head" data-reveal>
+    <div>
+        <span class="eyebrow-pill">Delete Profile</span>
+        <h1>Remove @Model.FirstName @Model.LastName?</h1>
+        <p>This action deletes the employee from the roster. Review the profile before confirming.</p>
+    </div>
+    <a class="btn btn-outline-neon" asp-action="displayemp">Back to Crew Board</a>
+</section>
+
+<section class="danger-panel" data-reveal>
+    <div class="danger-copy">
+        <h2>Confirm removal</h2>
+        <p>Once deleted, this crew member disappears from the board and detail page.</p>
+
+        <div class="detail-list compact">
+            <div class="detail-row">
+                <span>Name</span>
+                <strong>@Model.FirstName @Model.LastName</strong>
+            </div>
+            <div class="detail-row">
+                <span>Email</span>
+                <strong>@Model.Email</strong>
+            </div>
+            <div class="detail-row">
+                <span>Age</span>
+                <strong>@Model.Age</strong>
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="Delete" method="post" class="danger-actions">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger-soft">Yes, Delete Member</button>
+        <a class="btn btn-outline-neon" asp-action="Details" asp-route-id="@Model.Id">Cancel</a>
+    </form>
+</section>

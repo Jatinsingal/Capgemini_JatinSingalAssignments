@@ -1,0 +1,48 @@
+@model Dog_App.Models.Dog
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="dog-form-shell">
+    <div class="dog-form-header">
+        <h1 class="mb-2">Delete Dog</h1>
+        <p class="text-muted mb-0">Confirm before removing this dog profile from the list.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="dog-form-card">
+                <div class="dog-delete-alert">
+                    This action will permanently remove <strong>@Model.Name</strong> from the app.
+                </div>
+
+                <div class="dog-details-grid mb-4">
+                    <div class="dog-details-block">
+                        <span class="dog-preview-label">Dog ID</span>
+                        <div class="dog-detail-value">@Model.ID</div>
+                    </div>
+
+                    <div class="dog-details-block">
+                        <span class="dog-preview-label">Age</span>
+                        <div class="dog-detail-value">@Model.Age years</div>
+                    </div>
+
+                    <div class="dog-details-block dog-details-description">
+                        <span class="dog-preview-label">Description</span>
+                        <div class="dog-detail-value">@(string.IsNullOrWhiteSpace(Model.Description) ? "No description added." : Model.Description)</div>
+                    </div>
+                </div>
+
+                <form asp-action="Delete" asp-route-id="@Model.ID" method="post">
+                    <input type="hidden" asp-for="ID" />
+                    <div class="dog-form-actions">
+                        <button type="submit" class="btn dog-danger-btn">Delete Dog</button>
+                        <a asp-action="Details" asp-route-id="@Model.ID" class="btn dog-secondary-btn">Cancel</a>
+                        <a asp-action="Index" class="btn dog-secondary-btn">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

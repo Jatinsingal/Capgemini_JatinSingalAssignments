@@ -1,0 +1,23 @@
+﻿@model IEnumerable<MVCExampleDemo.Models.Dept>
+
+@{
+    ViewData["Title"] = "collectionofdepts";
+}
+
+<h1>collectionofdepts</h1>
+<table cellpadding="3" cellspacing="3" border="2">
+    <tr>
+        <th>Dept id</th>
+        <th>Deptn</th>
+        <th>Link</th>
+    </tr>
+    @foreach(var dept in Model)
+    {
+        <tr>
+            <td>@dept.DeptId</td>
+            <td>@dept.DeptName</td>
+            <td><a href="/Home/empsindept?deptid=@dept.DeptId">empsindept</a></td>
+        </tr>
+    }
+</table>
+

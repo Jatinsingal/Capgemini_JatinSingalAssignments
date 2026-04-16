@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+@{
+    var searchValue = ViewContext.HttpContext.Request.Query["search"].ToString();
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Dog_App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/quartz/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Dog_App.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="dog-page-glow dog-page-glow-left"></div>
+    <div class="dog-page-glow dog-page-glow-right"></div>
+    <div class="dog-page-grid"></div>
+
+    <header class="dog-app-header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg dog-topbar">
+                <a class="dog-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="dog-brand-mark"></span>
+                    <span class="dog-brand-copy">
+                        <span class="dog-brand-title">DogVerse</span>
+                        <span class="dog-brand-subtitle">Neon profiles for every dog</span>
+                    </span>
+                </a>
+
+                <button class="navbar-toggler dog-header-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#dogHeaderNav" aria-controls="dogHeaderNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                </button>
+
+                <div class="collapse navbar-collapse dog-header-panel" id="dogHeaderNav">
+                    <div class="dog-header-links">
+                        <a class="dog-nav-link @(currentController == "Home" ? "active" : string.Empty)" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="dog-nav-link @(currentController == "Dog" && currentAction == "Index" ? "active" : string.Empty)" asp-controller="Dog" asp-action="Index">Dog Gallery</a>
+                        <a class="dog-nav-link @(currentController == "Dog" && currentAction == "Create" ? "active" : string.Empty)" asp-controller="Dog" asp-action="Create">Create Profile</a>
+                    </div>
+
+                    <div class="dog-header-actions">
+                        <form class="dog-search-form" asp-controller="Dog" asp-action="Index" method="get">
+                            <input class="form-control dog-search-input" type="search" name="search" value="@searchValue" placeholder="Search dog name" aria-label="Search" />
+                            <button class="btn dog-search-btn" type="submit">Search</button>
+                        </form>
+
+                        <a asp-controller="Dog" asp-action="Create" class="btn dog-header-cta">Launch Profile</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container dog-main-shell">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="dog-footer">
+        <div class="container dog-footer-inner">
+            <span>DogVerse Experience 2026</span>
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

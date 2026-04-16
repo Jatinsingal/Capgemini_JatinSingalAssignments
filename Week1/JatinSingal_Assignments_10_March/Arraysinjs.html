@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Var Let Const Demo</title>
+  </head>
+
+  <body>
+    <p id="demo"></p>
+
+    <script>
+      // ----- VAR Example -----
+      var kk = "hai";
+      kk = "hi"; // reassignment allowed
+
+      {
+        var kk = "hello"; // var ignores block scope
+      }
+
+      console.log("VAR:", kk);
+
+      // ----- LET Example -----
+      let a = "start";
+
+      {
+        let a = "inside block"; // different variable
+      }
+
+      console.log("LET:", a);
+
+      // ----- CONST Example -----
+      const b = "constant value";
+
+      // b = "change";  // ❌ error (cannot reassign)
+
+      console.log("CONST:", b);
+
+      // Display result on webpage
+      document.getElementById("demo").innerHTML =
+        "VAR output: " + kk + "<br>LET output: " + a + "<br>CONST output: " + b;
+    </script>
+  </body>
+</html>

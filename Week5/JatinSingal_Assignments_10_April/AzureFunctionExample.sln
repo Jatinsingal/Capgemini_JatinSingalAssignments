@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureFunctionExample", "AzureFunctionExample", "{F622DF62-7415-D406-EB0F-15F388657313}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctionsTangyWeb", "AzureFunctionExample\AzureFunctionTangyWeb\AzureFunctionTangyWeb.csproj", "{72122E8F-318B-495F-A97A-6BE29CBA76EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TangyAzureFunc", "TangyAzureFunc", "{EC148CAE-185A-AB30-80FD-C28C39EE75FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangyAzureFunc", "TangyAzureFunc\TangyAzureFunc\TangyAzureFunc.csproj", "{3716D661-6F03-4EF8-94C3-36DBC6712954}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Debug|x64.Build.0 = Debug|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Debug|x86.Build.0 = Debug|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Release|x64.ActiveCfg = Release|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Release|x64.Build.0 = Release|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Release|x86.ActiveCfg = Release|Any CPU
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF}.Release|x86.Build.0 = Release|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Debug|x64.Build.0 = Debug|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Debug|x86.Build.0 = Debug|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Release|x64.ActiveCfg = Release|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Release|x64.Build.0 = Release|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Release|x86.ActiveCfg = Release|Any CPU
+		{3716D661-6F03-4EF8-94C3-36DBC6712954}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{72122E8F-318B-495F-A97A-6BE29CBA76EF} = {F622DF62-7415-D406-EB0F-15F388657313}
+		{3716D661-6F03-4EF8-94C3-36DBC6712954} = {EC148CAE-185A-AB30-80FD-C28C39EE75FC}
+	EndGlobalSection
+EndGlobal
+

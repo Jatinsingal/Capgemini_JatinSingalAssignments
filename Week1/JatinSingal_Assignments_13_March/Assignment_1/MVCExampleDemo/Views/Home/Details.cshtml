@@ -1,0 +1,53 @@
+﻿@model MVCExampleDemo.Models.Employee
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 40%;
+    }
+
+    table, th, td {
+        border: 2px solid black;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    img {
+        border-radius: 10px;
+    }
+</style>
+
+<table>
+    <tr>
+        <th>Employee ID</th>
+        <td>@Model.EmployeeID</td>
+    </tr>
+
+    <tr>
+        <th>Employee Name</th>
+        <td>@Model.EmpName</td>
+    </tr>
+
+    <tr>
+        <th>Salary</th>
+        <td>@Model.Salary</td>
+    </tr>
+
+    <tr>
+        <th>Employee Image</th>
+        <td>
+            <img src="@Model.ImageUrl" alt="@Model.EmpName" width="150" height="150" />
+        </td>
+    </tr>
+</table>
+
+<br />
+
+<a asp-controller="Home" asp-action="collectionofobjectpassing">Back to List</a>

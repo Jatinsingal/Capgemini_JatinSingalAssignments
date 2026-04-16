@@ -1,0 +1,116 @@
+﻿@model IEnumerable<DBFirstEFinASpCOreDemo.Models.Customer>
+
+@{
+    ViewData["Title"] = "OrderRange";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: white;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+        margin: 20px;
+    }
+
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    select {
+        padding: 8px;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        border-radius: 8px;
+        border: none;
+        background: #38bdf8;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+    table {
+        width: 60%;
+        margin: auto;
+        border-collapse: collapse;
+        background: rgba(255,255,255,0.05);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: center;
+    }
+
+    thead {
+        background: rgba(255,255,255,0.1);
+    }
+
+    tr:hover {
+        background: rgba(255,255,255,0.1);
+    }
+</style>
+
+<h1>Order Range</h1>
+
+<!-- 🔍 FORM -->
+<div class="form-container">
+    <form action="/NORTHWND/OrderRange" method="get">
+        <select name="range">
+            <option selected disabled>Select range</option>
+            <option value="5">Five</option>
+            <option value="10">Ten</option>
+            <option value="15">Fifteen</option>
+            <option value="20">Twenty</option>
+        </select>
+
+        <input type="submit" value="Search Customers" class="btn" />
+    </form>
+</div>
+
+<!-- 📊 RESULT -->
+@if (Model != null && Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Contact Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CustomerId</td>
+                    <td>@item.ContactName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Context.Request.Query.ContainsKey("range"))
+{
+    <p style="text-align:center;">No customers found ❌</p>
+}
+else
+{
+    <p style="text-align:center;">Please select a range and search 🔍</p>
+}

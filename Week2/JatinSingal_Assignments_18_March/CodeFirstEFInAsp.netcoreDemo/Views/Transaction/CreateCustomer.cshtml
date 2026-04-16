@@ -1,0 +1,76 @@
+@model CodeFirstEFInAsp.netcoreDemo.Models.PurchaseViewModel
+
+@{
+    ViewData["Title"] = "Buy Product";
+}
+
+<section class="page-head" data-reveal>
+    <div>
+        <span class="eyebrow-pill">Customer Purchase</span>
+        <h1>Create a product order and invoice.</h1>
+        <p>Enter the customer, product, quantity, and price. After submit, the app stores the customer and product, then opens a generated invoice.</p>
+    </div>
+    <a class="btn btn-outline-neon" asp-controller="Home" asp-action="Index">Back Home</a>
+</section>
+
+<section class="split-layout">
+    <article class="info-panel" data-reveal>
+        <h2>How this flow works</h2>
+        <ul class="feature-list">
+            <li>A new customer record is created from the customer name.</li>
+            <li>A product record is linked to that customer as the purchased item.</li>
+            <li>The final page shows an invoice with quantity, unit price, and total amount.</li>
+        </ul>
+
+        <div class="mini-summary">
+            <div>
+                <span>Order type</span>
+                <strong>Single product invoice</strong>
+            </div>
+            <div>
+                <span>Result</span>
+                <strong>Customer + Product + Invoice</strong>
+            </div>
+        </div>
+    </article>
+
+    <article class="form-panel" data-reveal>
+        <form asp-action="CreateCustomer" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="validation-shell"></div>
+
+            <div class="form-field">
+                <label asp-for="CustomerName"></label>
+                <input asp-for="CustomerName" class="form-control neon-input" placeholder="Customer full name" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="ProductName"></label>
+                <input asp-for="ProductName" class="form-control neon-input" placeholder="Product name" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Quantity"></label>
+                <input asp-for="Quantity" class="form-control neon-input" min="1" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="UnitPrice"></label>
+                <input asp-for="UnitPrice" class="form-control neon-input" min="1" step="0.01" placeholder="Unit price" />
+                <span asp-validation-for="UnitPrice" class="text-danger"></span>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn btn-neon">Generate Invoice</button>
+                <a class="btn btn-outline-neon" asp-controller="Home" asp-action="Index">Cancel</a>
+            </div>
+        </form>
+    </article>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

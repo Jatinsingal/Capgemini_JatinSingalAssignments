@@ -1,0 +1,62 @@
+﻿@model MVCExampleDemo.Models.EmpdeptViewModel
+@{
+    ViewData["Title"] = "mixedobjectpassing";
+}
+
+<h1>mixedobjectpassing</h1>
+
+<h1>Mixed Object Passing Example</h1>
+
+<h3>Current Date : @Model.date</h3>
+
+<hr />
+
+<h2>Employee Details</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Employee ID</th>
+        <td>@Model.emp.EmployeeID</td>
+    </tr>
+
+    <tr>
+        <th>Employee Name</th>
+        <td>@Model.emp.EmpName</td>
+    </tr>
+
+    <tr>
+        <th>Salary</th>
+        <td>@Model.emp.Salary</td>
+    </tr>
+
+    <tr>
+        <th>Image</th>
+        <td>
+            <img src="@Model.emp.ImageUrl" width="120" height="120" />
+        </td>
+    </tr>
+</table>
+
+<br />
+<hr />
+
+<h2>Department List</h2>
+
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Department ID</th>
+            <th>Department Name</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var dept in Model.deptlist)
+        {
+            <tr>
+                <td>@dept.DeptId</td>
+                <td>@dept.DeptName</td>
+            </tr>
+        }
+    </tbody>
+</table>

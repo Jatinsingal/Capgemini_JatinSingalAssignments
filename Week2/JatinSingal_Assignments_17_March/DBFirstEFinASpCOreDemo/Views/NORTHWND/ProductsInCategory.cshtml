@@ -1,0 +1,174 @@
+﻿@model IEnumerable<DBFirstEFinASpCOreDemo.Models.ProdCat>
+
+@{
+    ViewData["Title"] = "Products In Category";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-top: 20px;
+        background: linear-gradient(90deg, #38bdf8, #4ade80);
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    /* 🔍 Search Bar */
+    .search-box {
+        text-align: center;
+        margin: 20px;
+    }
+
+        .search-box input {
+            padding: 10px;
+            width: 250px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: #38bdf8;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .search-box button:hover {
+                transform: scale(1.1);
+            }
+
+    .table-container {
+        width: 85%;
+        margin: auto;
+        padding: 25px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        animation: slideUp 0.8s ease;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background: rgba(255,255,255,0.1);
+    }
+
+    th, td {
+        padding: 14px;
+        text-align: center;
+    }
+
+    tr {
+        transition: 0.3s;
+    }
+
+        tr:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.02);
+        }
+
+    /* Buttons */
+    .btn {
+        padding: 6px 12px;
+        border-radius: 10px;
+        text-decoration: none;
+        margin: 2px;
+        font-size: 13px;
+        transition: 0.3s;
+    }
+
+    .btn-edit {
+        background: #38bdf8;
+        color: black;
+    }
+
+    .btn-details {
+        background: #4ade80;
+        color: black;
+    }
+
+    .btn-delete {
+        background: #f87171;
+        color: black;
+    }
+
+    .btn:hover {
+        transform: scale(1.1);
+    }
+
+    /* Animations */
+    @@keyframes slideUp {
+        from {
+            transform: translateY(40px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+<h1>Products In Category</h1>
+
+<!-- 🔍 SEARCH FORM -->
+<div class="search-box">
+    <form method="get" asp-action="ProductsInCategory">
+        <input type="text" name="categoryname" placeholder="Enter Category (e.g. Beverages)" />
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<!-- 📦 TABLE -->
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Category Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.prodname</td>
+                        <td>@item.catname</td>
+                        <td>
+                            <a class="btn btn-edit" href="#">Edit</a>
+                            <a class="btn btn-details" href="#">Details</a>
+                            <a class="btn btn-delete" href="#">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3">No Data Found</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,66 @@
+@model CodeFirstEFInAsp.netcoreDemo.Models.Employee
+
+@{
+    ViewData["Title"] = "Edit Crew Member";
+}
+
+<section class="page-head" data-reveal>
+    <div>
+        <span class="eyebrow-pill">Edit Profile</span>
+        <h1>Update @Model.FirstName @Model.LastName.</h1>
+        <p>Refine the employee details and save the refreshed profile back to the board.</p>
+    </div>
+    <a class="btn btn-outline-neon" asp-action="displayemp">Back to Crew Board</a>
+</section>
+
+<section class="split-layout">
+    <article class="info-panel" data-reveal>
+        <h2>Quick edit tips</h2>
+        <ul class="feature-list">
+            <li>Keep the email valid so contact details stay clean.</li>
+            <li>Age accepts values from 1 to 100.</li>
+            <li>Save changes to instantly update the roster and detail page.</li>
+        </ul>
+    </article>
+
+    <article class="form-panel" data-reveal>
+        <form asp-action="Edit" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="validation-shell"></div>
+
+            <div class="form-field">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control neon-input" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control neon-input" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control neon-input" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Age"></label>
+                <input asp-for="Age" class="form-control neon-input" min="1" max="100" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn btn-neon">Save Changes</button>
+                <a class="btn btn-outline-neon" asp-action="Details" asp-route-id="@Model.Id">View Details</a>
+            </div>
+        </form>
+    </article>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

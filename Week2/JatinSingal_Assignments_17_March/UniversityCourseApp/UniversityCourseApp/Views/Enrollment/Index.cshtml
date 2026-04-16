@@ -1,0 +1,61 @@
+@model IEnumerable<UniversityCourseApp.Models.StudentCoursesVM>
+
+@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<section class="hero-panel page-intro">
+    <div>
+        <span class="eyebrow">Enrollment overview</span>
+        <h1 class="page-title">Student Dashboard</h1>
+        <p class="page-subtitle">
+            Track branches, active course loads, and academic performance from one clean view.
+        </p>
+    </div>
+    <div class="stats-chip">
+        <span class="stats-value">@Model.Count()</span>
+        <span class="stats-label">Students</span>
+    </div>
+</section>
+
+<section class="content-card">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">All Students</h2>
+            <p class="section-copy">Each card preserves the current flow and links directly to a full details view.</p>
+        </div>
+    </div>
+
+    <div class="student-grid">
+        @foreach (var student in Model)
+        {
+            <article class="student-card">
+                <div class="student-card__header">
+                    <div>
+                        <h3>@student.Name</h3>
+                        <p>@student.Branch</p>
+                    </div>
+                    <span class="course-badge">@student.CourseCount courses</span>
+                </div>
+
+                <div class="student-card__courses">
+                    @if (student.CourseTitles.Any())
+                    {
+                        @foreach (var course in student.CourseTitles)
+                        {
+                            <span class="course-pill">@course</span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="empty-state">No courses enrolled yet</span>
+                    }
+                </div>
+
+                <a class="details-link" asp-action="Details" asp-route-studentId="@student.StudentId">
+                    View Details
+                </a>
+            </article>
+        }
+    </div>
+</section>

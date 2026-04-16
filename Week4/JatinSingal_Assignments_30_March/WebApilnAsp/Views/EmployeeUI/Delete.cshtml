@@ -1,0 +1,62 @@
+@model int
+@{
+    ViewData["Title"] = "Delete Employee";
+    var employeeApiRoot = Url.Content("~/api/Employee");
+    var indexUrl = Url.Action("Index", "EmployeeUI") ?? "/EmployeeUI";
+    var detailsTemplate = Url.Action("Details", "EmployeeUI", new { id = "__id__" }) ?? "/EmployeeUI/Details/__id__";
+}
+
+<h3 class="mb-3">Delete Employee</h3>
+<div id="deleteMessage"></div>
+<div id="deleteHost"></div>
+
+@section Scripts {
+    <script src="~/js/employee-ui.js" asp-append-version="true"></script>
+    <script>
+        const employeeId = @Model;
+        const employeeApiUrl = '@employeeApiRoot/' + employeeId;
+        const indexUrl = '@indexUrl';
+        const detailsTemplate = '@detailsTemplate';
+
+        $(function () {
+            $.get(employeeApiUrl)
+                .done(function (employee) {
+                    $("#deleteHost").html(`
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>${employeeUi.escapeHtml((employee.firstName || "") + " " + (employee.lastName || ""))}</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <img src="${employeeUi.normalizeImage(employee.imagePath)}" alt="Employee Image" class="employee-image" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p><strong>Email:</strong> ${employeeUi.escapeHtml(employee.email)}</p>
+                                        <p><strong>Age:</strong> ${employeeUi.escapeHtml(employee.age)}</p>
+                                        <p class="text-danger"><strong>Are you sure you want to delete this employee?</strong></p>
+                                        <button type="button" id="confirmDeleteBtn" class="btn btn-danger">Delete</button>
+                                        <a class="btn btn-secondary" href="${employeeUi.buildRoute(detailsTemplate, employee.id)}">Cancel</a>
+                                        <a class="btn btn-outline-secondary" href="${indexUrl}">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`);
+
+                    $("#confirmDeleteBtn").on("click", function () {
+                        $.ajax({
+                            url: employeeApiUrl,
+                            type: "DELETE"
+                        }).done(function () {
+                            window.location.href = indexUrl;
+                        }).fail(function (xhr) {
+                            employeeUi.renderAlert("#deleteMessage", "danger", employeeUi.readError(xhr, "Unable to delete employee."));
+                        });
+                    });
+                })
+                .fail(function (xhr) {
+                    employeeUi.renderAlert("#deleteMessage", "danger", employeeUi.readError(xhr, "Unable to load employee data."));
+                });
+        });
+    </script>
+}

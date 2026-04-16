@@ -1,0 +1,63 @@
+@model CodeFirstEFInAsp.netcoreDemo.Models.InvoiceViewModel
+
+@{
+    ViewData["Title"] = "Invoice";
+}
+
+<section class="page-head" data-reveal>
+    <div>
+        <span class="eyebrow-pill">Invoice Ready</span>
+        <h1>Purchase completed successfully.</h1>
+        <p>Your customer purchase has been saved and the invoice is ready below.</p>
+    </div>
+    <div class="button-row">
+        <a class="btn btn-neon" asp-action="CreateCustomer">Create Another Invoice</a>
+        <a class="btn btn-outline-neon" asp-controller="Home" asp-action="Index">Home</a>
+    </div>
+</section>
+
+<section class="invoice-grid">
+    <article class="invoice-card" data-reveal>
+        <span class="card-kicker">Invoice Info</span>
+        <h2>@Model.InvoiceNumber</h2>
+        <div class="detail-list compact">
+            <div class="detail-row">
+                <span>Invoice Date</span>
+                <strong>@Model.InvoiceDate.ToString("dd MMM yyyy")</strong>
+            </div>
+            <div class="detail-row">
+                <span>Customer ID</span>
+                <strong>#@Model.Customer.CustomerID</strong>
+            </div>
+            <div class="detail-row">
+                <span>Product ID</span>
+                <strong>#@Model.Product.ProductID</strong>
+            </div>
+        </div>
+    </article>
+
+    <article class="invoice-card" data-reveal>
+        <span class="card-kicker">Billing To</span>
+        <h2>@Model.Customer.CustomerName</h2>
+        <div class="detail-list compact">
+            <div class="detail-row">
+                <span>Purchased Product</span>
+                <strong>@Model.Product.ProductName</strong>
+            </div>
+            <div class="detail-row">
+                <span>Quantity</span>
+                <strong>@Model.Quantity</strong>
+            </div>
+            <div class="detail-row">
+                <span>Unit Price</span>
+                <strong>@Model.UnitPrice.ToString("C")</strong>
+            </div>
+        </div>
+    </article>
+
+    <article class="invoice-total" data-reveal>
+        <span class="card-kicker">Total Due</span>
+        <h2>@Model.TotalAmount.ToString("C")</h2>
+        <p>This invoice represents one customer buying one product, using the new transaction flow you added to the project.</p>
+    </article>
+</section>

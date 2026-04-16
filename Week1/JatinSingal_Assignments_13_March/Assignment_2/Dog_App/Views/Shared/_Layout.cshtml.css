@@ -1,0 +1,30 @@
+a.navbar-brand {
+  white-space: normal;
+  text-align: left;
+  word-break: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+.border-top,
+.border-bottom {
+  border-color: transparent !important;
+}
+
+.box-shadow {
+  box-shadow: none;
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer {
+  position: static;
+  width: auto;
+  white-space: normal;
+  line-height: normal;
+}

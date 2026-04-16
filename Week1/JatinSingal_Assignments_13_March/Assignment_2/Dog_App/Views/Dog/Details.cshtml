@@ -1,0 +1,58 @@
+@model Dog_App.Models.Dog
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="dog-form-shell">
+    <div class="dog-form-header">
+        <h1 class="mb-2">Dog Details</h1>
+        <p class="text-muted mb-0">Review the saved profile information for this dog.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="dog-form-card">
+                <div class="dog-details-grid">
+                    <div class="dog-details-block">
+                        <span class="dog-preview-label">Dog ID</span>
+                        <div class="dog-detail-value">@Model.ID</div>
+                    </div>
+
+                    <div class="dog-details-block">
+                        <span class="dog-preview-label">Name</span>
+                        <div class="dog-detail-value">@Model.Name</div>
+                    </div>
+
+                    <div class="dog-details-block">
+                        <span class="dog-preview-label">Age</span>
+                        <div class="dog-detail-value">@Model.Age years</div>
+                    </div>
+
+                    <div class="dog-details-block dog-details-description">
+                        <span class="dog-preview-label">Description</span>
+                        <div class="dog-detail-value">@(string.IsNullOrWhiteSpace(Model.Description) ? "No description added." : Model.Description)</div>
+                    </div>
+                </div>
+
+                <div class="dog-image-preview mt-4">
+                    <span class="dog-preview-label">Profile image</span>
+                    @if (!string.IsNullOrWhiteSpace(Model.ImagePath))
+                    {
+                        <img src="@Model.ImagePath" alt="@Model.Name" class="dog-preview-image" />
+                    }
+                    else
+                    {
+                        <div class="dog-empty-image">No image uploaded yet.</div>
+                    }
+                </div>
+
+                <div class="dog-form-actions mt-4">
+                    <a asp-action="Edit" asp-route-id="@Model.ID" class="btn dog-primary-btn">Edit Dog</a>
+                    <a asp-action="Delete" asp-route-id="@Model.ID" class="btn dog-secondary-btn">Delete Dog</a>
+                    <a asp-action="Index" class="btn dog-secondary-btn">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

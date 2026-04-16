@@ -1,0 +1,30 @@
+@model IEnumerable<CosmosDB_Demo.Models.Itemmodel>
+
+<h2>Items from Cosmos DB</h2>
+
+@if (ViewBag.UserId != null)
+{
+    <p><strong>Login Success:</strong> @ViewBag.UserId</p>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+            <td>@item.Category</td>
+        </tr>
+    }
+    </tbody>
+</table>

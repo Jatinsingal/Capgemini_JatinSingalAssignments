@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Index2";
+    int n = 10;
+}
+
+<h1>Index2</h1>
+
+@{
+    for(int i = 0; i <= n; i++)
+    {
+        @Html.Partial("_Card", @i);
+    }
+
+}

@@ -1,0 +1,47 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="hero-panel">
+    <div>
+        <span class="hero-chip">Decoupled Architecture</span>
+        <h1 class="display-5 fw-bold mt-3">Product CRUD frontend connected to your Web API</h1>
+        <p class="lead text-secondary mt-3">
+            This MVC application talks to the Product API running at <strong>@ViewBag.ApiBaseUrl</strong>.
+            Start the API first, then open the product screens from here.
+        </p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+            <a class="btn btn-primary btn-lg" asp-controller="Products" asp-action="Index">Open Product List</a>
+            <a class="btn btn-outline-dark btn-lg" href="http://localhost:5058/swagger" target="_blank" rel="noreferrer">Open Swagger</a>
+        </div>
+    </div>
+    <div class="info-card">
+        <h2 class="h4">Run Order</h2>
+        <ol class="mb-0">
+            <li>Run the Web API project on <code>http://localhost:5058</code>.</li>
+            <li>Run the MVC project on <code>http://localhost:5192</code>.</li>
+            <li>Manage products from the MVC screens.</li>
+        </ol>
+    </div>
+</section>
+
+<section class="row g-4 mt-2">
+    <div class="col-md-4">
+        <div class="feature-card">
+            <h3 class="h5">Model</h3>
+            <p class="mb-0">Product uses only Id, Name, Price, and Category with validation attributes.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <h3 class="h5">Service Layer</h3>
+            <p class="mb-0">The API uses an interface and service implementation so the CRUD logic stays clean and reusable.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <h3 class="h5">Controller Flow</h3>
+            <p class="mb-0">MVC calls the Web API through HttpClient, which keeps frontend and backend nicely decoupled.</p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,69 @@
+@model Dog_App.Models.Dog
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="dog-form-shell">
+    <div class="dog-form-header">
+        <h1 class="mb-2">Edit Dog</h1>
+        <p class="text-muted mb-0">Update the dog details and refresh the profile photo if needed.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-xl-6">
+            <div class="dog-form-card">
+                <form asp-action="Edit" asp-route-id="@Model.ID" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ID" />
+                    <input type="hidden" asp-for="ImagePath" />
+
+                    <div class="dog-form-note">
+                        Make your changes and save to update this dog profile.
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Name" class="control-label fw-semibold"></label>
+                        <input asp-for="Name" class="form-control dog-input" placeholder="Enter dog name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Age" class="control-label fw-semibold"></label>
+                        <input asp-for="Age" class="form-control dog-input" placeholder="Enter age" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Description" class="control-label fw-semibold"></label>
+                        <textarea asp-for="Description" class="form-control dog-textarea" rows="5" placeholder="Update the dog's story, habits, or personality"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.ImagePath))
+                    {
+                        <div class="dog-image-preview mb-3">
+                            <span class="dog-preview-label">Current image</span>
+                            <img src="@Model.ImagePath" alt="@Model.Name" class="dog-preview-image" />
+                        </div>
+                    }
+
+                    <div class="form-group mb-4">
+                        <label class="control-label fw-semibold">Replace Dog Image</label>
+                        <input type="file" name="imagefile" class="form-control dog-input" />
+                    </div>
+
+                    <div class="dog-form-actions">
+                        <button type="submit" class="btn dog-primary-btn">Update Dog</button>
+                        <a asp-action="Details" asp-route-id="@Model.ID" class="btn dog-secondary-btn">View Details</a>
+                        <a asp-action="Index" class="btn dog-secondary-btn">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

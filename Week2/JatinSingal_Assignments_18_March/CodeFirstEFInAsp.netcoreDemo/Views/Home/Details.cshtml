@@ -1,0 +1,41 @@
+@model CodeFirstEFInAsp.netcoreDemo.Models.Employee
+
+@{
+    ViewData["Title"] = "Member Details";
+
+    string initials = $"{(string.IsNullOrWhiteSpace(Model.FirstName) ? "?" : Model.FirstName.Substring(0, 1).ToUpperInvariant())}{(string.IsNullOrWhiteSpace(Model.LastName) ? "?" : Model.LastName.Substring(0, 1).ToUpperInvariant())}";
+}
+
+<section class="page-head" data-reveal>
+    <div>
+        <span class="eyebrow-pill">Profile Details</span>
+        <h1>@Model.FirstName @Model.LastName</h1>
+        <p>Review this employee profile with the updated neon detail layout.</p>
+    </div>
+    <div class="button-row">
+        <a class="btn btn-neon" asp-action="Edit" asp-route-id="@Model.Id">Edit Member</a>
+        <a class="btn btn-outline-neon" asp-action="displayemp">Back to Crew Board</a>
+    </div>
+</section>
+
+<section class="detail-panel" data-reveal>
+    <div class="detail-badge">@initials</div>
+    <div class="detail-list">
+        <div class="detail-row">
+            <span>First Name</span>
+            <strong>@Model.FirstName</strong>
+        </div>
+        <div class="detail-row">
+            <span>Last Name</span>
+            <strong>@Model.LastName</strong>
+        </div>
+        <div class="detail-row">
+            <span>Email</span>
+            <strong>@Model.Email</strong>
+        </div>
+        <div class="detail-row">
+            <span>Age</span>
+            <strong>@Model.Age</strong>
+        </div>
+    </div>
+</section>

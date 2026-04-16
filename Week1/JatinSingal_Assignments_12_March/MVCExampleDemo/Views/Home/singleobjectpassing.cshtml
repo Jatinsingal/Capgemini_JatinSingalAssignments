@@ -1,0 +1,38 @@
+﻿@model MVCExampleDemo.Models.Employee
+@{
+    ViewData["Title"] = "singleobjectpassing";
+}
+
+<h1>singleobjectpassing</h1>
+<style>
+	table {
+		border-collapse: collapse;
+		width: 50%;
+	}
+
+	table, th, td {
+		border: 2px solid black;
+	}
+
+	th, td {
+		padding: 8px;
+		text-align: left;
+	}
+</style>
+
+<table>
+	<thead>
+		<tr>
+			<th>EmployeeID</th>
+			<th>EmpName</th>
+			<th>Salary</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>@Model.EmployeeID</td>
+			<td>@Model.EmpName</td>
+			<td>@Model.Salary</td>
+		</tr>
+	</tbody>
+</table>

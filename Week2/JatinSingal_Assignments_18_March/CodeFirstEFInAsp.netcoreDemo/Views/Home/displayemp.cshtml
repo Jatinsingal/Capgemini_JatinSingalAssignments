@@ -1,0 +1,91 @@
+@using System.Linq
+@using CodeFirstEFInAsp.netcoreDemo.Models
+@model IEnumerable<Employee>
+
+@{
+    ViewData["Title"] = "Crew Board";
+    var employees = Model?.ToList() ?? new List<Employee>();
+    var averageAge = employees.Count == 0 ? 0 : employees.Average(e => e.Age);
+
+    string Initials(string firstName, string lastName)
+    {
+        var first = string.IsNullOrWhiteSpace(firstName) ? "?" : firstName.Substring(0, 1).ToUpperInvariant();
+        var last = string.IsNullOrWhiteSpace(lastName) ? "?" : lastName.Substring(0, 1).ToUpperInvariant();
+        return $"{first}{last}";
+    }
+}
+
+<section class="page-head" data-reveal>
+    <div>
+        <span class="eyebrow-pill">Crew Board</span>
+        <h1>Animated roster of your neon team.</h1>
+        <p>Manage every employee from one glowing command center.</p>
+    </div>
+    <a class="btn btn-neon" asp-action="Create">Add New Member</a>
+</section>
+
+<section class="stat-grid" data-reveal>
+    <article class="stat-card">
+        <span>Total Members</span>
+        <strong>@employees.Count</strong>
+    </article>
+    <article class="stat-card">
+        <span>Average Age</span>
+        <strong>@averageAge.ToString("0")</strong>
+    </article>
+    <article class="stat-card">
+        <span>Board Status</span>
+        <strong>@(employees.Count == 0 ? "Waiting" : "Live")</strong>
+    </article>
+</section>
+
+<section class="table-panel" data-reveal>
+    @if (employees.Count == 0)
+    {
+        <div class="empty-state">
+            <h2>No crew members yet.</h2>
+            <p>Create your first profile and this board will light up with employee cards and actions.</p>
+            <a class="btn btn-neon" asp-action="Create">Create First Member</a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table crew-table align-middle">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in employees)
+                {
+                    <tr data-reveal>
+                        <td>
+                            <div class="person-cell">
+                                <span class="avatar-badge">@Initials(item.FirstName, item.LastName)</span>
+                                <div>
+                                    <strong>@item.FirstName @item.LastName</strong>
+                                    <span>Employee ID #@item.Id</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>@item.Email</td>
+                        <td>@item.Age</td>
+                        <td class="text-end">
+                            <div class="action-group">
+                                <a class="btn btn-sm btn-outline-neon" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                <a class="btn btn-sm btn-outline-neon" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a class="btn btn-sm btn-danger-soft" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

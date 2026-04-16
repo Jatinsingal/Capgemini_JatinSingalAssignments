@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Task</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #box {
+            position: relative;
+            margin-top: 100px;
+            font-size: 30px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 8px 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Buttons -->
+    <button id="up">Move Up</button>
+    <button id="down">Move Down</button>
+    <button id="color">Change Color</button>
+    <button id="toggle">Disappear/Re-appear</button>
+
+    <!-- Text -->
+    <div id="box">Make Me Do Stuff!</div>
+
+    <script>
+        $(document).ready(function(){
+
+            // Move Up
+            $("#up").click(function(){
+                $("#box").animate({
+                    top: "-=20px"
+                });
+            });
+
+            // Move Down
+            $("#down").click(function(){
+                $("#box").animate({
+                    top: "+=20px"
+                });
+            });
+
+            // Change Color
+            $("#color").click(function(){
+                $("#box").css("color", "red");
+            });
+
+            // Hide / Show
+            $("#toggle").click(function(){
+                $("#box").fadeToggle();
+            });
+
+        });
+    </script>
+
+</body>
+</html>

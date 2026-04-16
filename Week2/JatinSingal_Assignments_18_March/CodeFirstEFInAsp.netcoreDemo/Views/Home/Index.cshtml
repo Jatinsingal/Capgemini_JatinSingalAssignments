@@ -1,0 +1,96 @@
+@{
+    ViewData["Title"] = "Neon Crew Home";
+    var employeeCount = ViewBag.EmployeeCount is int count ? count : 0;
+}
+
+<section class="hero-panel" data-reveal>
+    <div class="hero-copy">
+        <span class="eyebrow-pill">Animated Neon Workspace</span>
+        <h1>Build a cartoon-bright employee board that feels alive.</h1>
+        <p>
+            This dashboard now has a complete crew flow with neon gradients, glass cards, floating shapes,
+            reveal animations, and quick actions to create, edit, inspect, and remove employee records.
+        </p>
+
+        <div class="hero-actions">
+            <a class="btn btn-neon" asp-action="displayemp">Open Crew Board</a>
+            <a class="btn btn-outline-neon" asp-action="Create">Add New Member</a>
+        </div>
+
+        <div class="hero-metrics">
+            <article class="metric-chip">
+                <strong>@employeeCount</strong>
+                <span>active crew members</span>
+            </article>
+            <article class="metric-chip">
+                <strong>CRUD</strong>
+                <span>create, update, view, delete flow</span>
+            </article>
+            <article class="metric-chip">
+                <strong>Neon</strong>
+                <span>cartoon-inspired animated UI system</span>
+            </article>
+        </div>
+    </div>
+
+    <div class="hero-visual" data-float>
+        <div class="mascot-card">
+            <span class="sticker sticker-pink">Glow</span>
+            <span class="sticker sticker-cyan">Pop</span>
+            <div class="planet-ring"></div>
+            <div class="mascot-face">
+                <span></span>
+                <span></span>
+                <strong>NC</strong>
+            </div>
+            <div class="visual-bars">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content-grid">
+    <article class="feature-card" data-reveal>
+        <span class="card-kicker">What was completed</span>
+        <h2>Missing employee actions are now wired in.</h2>
+        <p>The employee table no longer points to unfinished pages. Edit and delete now have working controller actions and dedicated views.</p>
+    </article>
+
+    <article class="feature-card alt" data-reveal>
+        <span class="card-kicker">Visual upgrade</span>
+        <h2>Every major page now follows one bold design language.</h2>
+        <p>Shared gradients, hover states, glowing buttons, animated backgrounds, and glassmorphism panels create a more attractive experience.</p>
+    </article>
+
+    <article class="feature-card" data-reveal>
+        <span class="card-kicker">Smooth motion</span>
+        <h2>Scroll reveals and floating elements add energy.</h2>
+        <p>The interface uses CSS keyframes and lightweight JavaScript to reveal cards, follow the cursor with a spotlight, and keep the page feeling animated.</p>
+    </article>
+</section>
+
+<section class="showcase-panel" data-reveal>
+    <div class="section-heading">
+        <span class="eyebrow-pill">Launch Fast</span>
+        <h2>Your next move</h2>
+    </div>
+
+    <div class="showcase-actions">
+        <a class="action-tile" asp-action="Create">
+            <strong>Add a crew member</strong>
+            <span>Create a new employee profile with validation.</span>
+        </a>
+        <a class="action-tile" asp-action="displayemp">
+            <strong>Browse the roster</strong>
+            <span>See everyone in the animated neon board.</span>
+        </a>
+        <a class="action-tile" asp-controller="Transaction" asp-action="CreateCustomer">
+            <strong>Create invoice flow</strong>
+            <span>Register a customer, attach a product purchase, and open the final invoice.</span>
+        </a>
+    </div>
+</section>

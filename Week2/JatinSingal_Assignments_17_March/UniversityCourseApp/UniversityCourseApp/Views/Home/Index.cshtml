@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="hero-panel home-hero">
+    <div class="hero-copy">
+        <span class="eyebrow">Academic command center</span>
+        <h1 class="page-title">Manage students, courses, and outcomes in one place.</h1>
+        <p class="page-subtitle">
+            This dashboard keeps the project structure simple while giving the experience a more modern, polished presentation.
+        </p>
+        <div class="hero-actions">
+            <a class="primary-link" asp-controller="Enrollment" asp-action="Index">Open Student Dashboard</a>
+            <a class="secondary-link" asp-controller="Home" asp-action="Privacy">View Privacy</a>
+        </div>
+    </div>
+
+    <div class="hero-highlight">
+        <div class="highlight-card">
+            <span class="highlight-label">Focus</span>
+            <strong>Clean MVC Flow</strong>
+            <p>Controllers, models, and methods stay familiar while the UI feels far more intentional.</p>
+        </div>
+    </div>
+</section>

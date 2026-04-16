@@ -1,0 +1,44 @@
+@model List<string>
+
+@{
+    ViewData["Title"] = "Manage Blobs";
+}
+
+<div class="container p-4 border">
+    @if (TempData["ErrorMessage"] is string errorMessage)
+    {
+        <div class="alert alert-warning">@errorMessage</div>
+    }
+    <div class="row">
+        <div class="col-6">
+            <h3>Container Name - @ViewBag.ContainerName</h3>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="AddFile" asp-controller="Blob" asp-route-containerName="@ViewBag.ContainerName" class="btn btn-success">Add Blob</a>
+        </div>
+    </div>
+    <div class="container pt-4">
+        @if (Model != null && Model.Count > 0)
+        {
+            @foreach (var item in Model)
+            {
+                <div class="row py-1">
+                    <div class="col-6">
+                        <a asp-action="ViewFile" asp-controller="Blob" target="_blank" asp-route-name="@item" asp-route-containerName="@ViewBag.ContainerName">
+                            @item
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="DeleteFile" asp-controller="Blob" asp-route-name="@item" asp-route-containerName="@ViewBag.ContainerName" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No blobs found in this container.</p>
+        }
+    </div>
+</div>

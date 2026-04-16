@@ -1,0 +1,89 @@
+@model int
+@{
+    ViewData["Title"] = "Edit Employee";
+    var employeeApiRoot = Url.Content("~/api/Employee");
+    var detailsTemplate = Url.Action("Details", "EmployeeUI", new { id = "__id__" }) ?? "/EmployeeUI/Details/__id__";
+    var indexUrl = Url.Action("Index", "EmployeeUI") ?? "/EmployeeUI";
+}
+
+<h3 class="mb-3">Edit Employee</h3>
+<div id="editMessage"></div>
+<div id="editHost"></div>
+
+@section Scripts {
+    <script src="~/js/employee-ui.js" asp-append-version="true"></script>
+    <script>
+        const employeeId = @Model;
+        const employeeApiUrl = '@employeeApiRoot/' + employeeId;
+        const detailsTemplate = '@detailsTemplate';
+        const indexUrl = '@indexUrl';
+
+        $(function () {
+            $.get(employeeApiUrl)
+                .done(function (employee) {
+                    $("#editHost").html(`
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Edit ${employeeUi.escapeHtml((employee.firstName || "") + " " + (employee.lastName || ""))}</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-4">
+                                    <div class="col-md-4">
+                                        <img src="${employeeUi.normalizeImage(employee.imagePath)}" alt="Employee Image" class="employee-image" />
+                                    </div>
+                                </div>
+                                <form id="editEmployeeForm" enctype="multipart/form-data">
+                                    <div id="validationSummary"></div>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">First Name</label>
+                                            <input class="form-control" name="FirstName" value="${employeeUi.escapeAttribute(employee.firstName)}" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Last Name</label>
+                                            <input class="form-control" name="LastName" value="${employeeUi.escapeAttribute(employee.lastName)}" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email</label>
+                                            <input class="form-control" name="Email" type="email" value="${employeeUi.escapeAttribute(employee.email)}" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Age</label>
+                                            <input class="form-control" name="Age" type="number" min="0" max="100" value="${employeeUi.escapeAttribute(employee.age)}" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Image</label>
+                                            <input class="form-control" name="image" type="file" accept="image/*" />
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a class="btn btn-secondary" href="${employeeUi.buildRoute(detailsTemplate, employee.id)}">Cancel</a>
+                                        <a class="btn btn-outline-secondary" href="${indexUrl}">Back</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>`);
+
+                    $("#editEmployeeForm").on("submit", function (event) {
+                        event.preventDefault();
+
+                        $.ajax({
+                            url: employeeApiUrl,
+                            type: "PUT",
+                            data: new FormData(this),
+                            processData: false,
+                            contentType: false
+                        }).done(function () {
+                            window.location.href = employeeUi.buildRoute(detailsTemplate, employeeId);
+                        }).fail(function (xhr) {
+                            employeeUi.renderAlert("#validationSummary", "danger", employeeUi.readValidation(xhr));
+                        });
+                    });
+                })
+                .fail(function (xhr) {
+                    employeeUi.renderAlert("#editMessage", "danger", employeeUi.readError(xhr, "Unable to load employee data."));
+                });
+        });
+    </script>
+}

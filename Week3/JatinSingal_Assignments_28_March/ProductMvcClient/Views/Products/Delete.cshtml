@@ -1,0 +1,36 @@
+@model ProductMvcClient.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<section class="delete-shell">
+    <div class="section-title">
+        <div>
+            <h1 class="h3 mb-1">Delete Product</h1>
+            <p class="text-secondary mb-0">Confirm before removing this product from the database.</p>
+        </div>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
+    </div>
+
+    <div class="alert alert-warning">This action cannot be undone.</div>
+
+    <dl class="row mb-4">
+        <dt class="col-sm-3">Id</dt>
+        <dd class="col-sm-9">@Model.Id</dd>
+
+        <dt class="col-sm-3">Name</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+
+        <dt class="col-sm-3">Price</dt>
+        <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
+
+        <dt class="col-sm-3">Category</dt>
+        <dd class="col-sm-9">@Model.Category</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input asp-for="Id" type="hidden" />
+        <button type="submit" class="btn btn-danger">Delete Product</button>
+    </form>
+</section>

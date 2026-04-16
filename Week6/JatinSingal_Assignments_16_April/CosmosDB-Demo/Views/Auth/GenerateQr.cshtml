@@ -1,0 +1,15 @@
+@{
+    var qrImageUrl = Url.Action("GetQrImage", "Auth", new { url = (string?)ViewBag.Url, t = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() });
+}
+
+<h2>Scan QR to Login</h2>
+
+<img src="@qrImageUrl" width="250" />
+
+<p>Scan this QR using your phone</p>
+
+@if (ViewBag.Url != null)
+{
+    <p><a href="@ViewBag.Url">Open login link</a></p>
+    <p style="word-break: break-all;">@ViewBag.Url</p>
+}

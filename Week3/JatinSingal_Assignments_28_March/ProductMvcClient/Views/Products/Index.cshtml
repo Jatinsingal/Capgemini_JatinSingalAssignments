@@ -1,0 +1,72 @@
+@model IEnumerable<ProductMvcClient.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<section class="table-shell">
+    <div class="section-title">
+        <div>
+            <h1 class="h3 mb-1">Product Management</h1>
+            <p class="text-secondary mb-0">API URL: <code>@ViewBag.ApiBaseUrl</code></p>
+        </div>
+        <a class="btn btn-primary" asp-action="Create">Add Product</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] is string successMessage)
+    {
+        <div class="alert alert-success">@successMessage</div>
+    }
+
+    @if (TempData["ErrorMessage"] is string errorMessage)
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+
+    @if (ViewBag.ErrorMessage is string pageError)
+    {
+        <div class="alert alert-danger">
+            Unable to connect to the API. Start the backend first.
+            <div class="small mt-1">@pageError</div>
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <h2 class="h5">No products available</h2>
+            <p class="mb-0">Create a product from this screen or check whether the API is connected to SQL Server.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        <td>@product.Price.ToString("C")</td>
+                        <td>@product.Category</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-warning me-2" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
+                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

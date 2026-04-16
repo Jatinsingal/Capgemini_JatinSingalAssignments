@@ -1,0 +1,12 @@
+﻿@model IEnumerable<PartialViewCGDemo.Models.Employee>
+
+@{
+    ViewData["Title"] = "DisplayAllEmp";
+}
+
+<h1>DisplayAllEmp</h1>
+
+@foreach (var emp in Model)
+{
+    @Html.Partial("_EmpCard", emp);
+}

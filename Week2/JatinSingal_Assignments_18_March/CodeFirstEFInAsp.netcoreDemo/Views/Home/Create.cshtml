@@ -1,0 +1,65 @@
+@model CodeFirstEFInAsp.netcoreDemo.Models.Employee
+
+@{
+    ViewData["Title"] = "Add Crew Member";
+}
+
+<section class="page-head" data-reveal>
+    <div>
+        <span class="eyebrow-pill">Create Profile</span>
+        <h1>Add a fresh neon crew member.</h1>
+        <p>Fill in the details below to add someone to the employee board.</p>
+    </div>
+    <a class="btn btn-outline-neon" asp-action="displayemp">Back to Crew Board</a>
+</section>
+
+<section class="split-layout">
+    <article class="info-panel" data-reveal>
+        <h2>What this form does</h2>
+        <ul class="feature-list">
+            <li>Saves a new employee into the database.</li>
+            <li>Validates name, email, and age before submit.</li>
+            <li>Sends you back to the animated crew board after creation.</li>
+        </ul>
+    </article>
+
+    <article class="form-panel" data-reveal>
+        <form asp-action="Create" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="validation-shell"></div>
+
+            <div class="form-field">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control neon-input" placeholder="First name" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control neon-input" placeholder="Last name" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control neon-input" placeholder="name@example.com" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Age"></label>
+                <input asp-for="Age" class="form-control neon-input" placeholder="Age" min="1" max="100" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn btn-neon">Create Member</button>
+                <a class="btn btn-outline-neon" asp-action="displayemp">Cancel</a>
+            </div>
+        </form>
+    </article>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

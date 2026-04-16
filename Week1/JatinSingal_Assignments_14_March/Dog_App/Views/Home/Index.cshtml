@@ -1,0 +1,56 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="dog-home-showcase">
+    <div class="row g-4 align-items-stretch">
+        <div class="col-lg-8">
+            <div class="dog-hero-panel">
+                <span class="dog-panel-kicker">Future Ready Dog Profiles</span>
+                <h1>Collect your favorite dog stories in a bold neon gallery.</h1>
+                <p class="dog-home-copy">
+                    Create glowing dog cards, manage photos, and keep every profile inside a dark premium interface inspired by showcase landing pages.
+                </p>
+
+                <div class="dog-home-actions">
+                    <a asp-controller="Dog" asp-action="Index" class="btn dog-primary-btn">Explore Dogs</a>
+                    <a asp-controller="Dog" asp-action="Create" class="btn dog-secondary-btn">Create New Dog</a>
+                </div>
+
+                <div class="dog-home-orbs">
+                    <span class="dog-orb dog-orb-one"></span>
+                    <span class="dog-orb dog-orb-two"></span>
+                    <span class="dog-orb dog-orb-three"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="dog-side-stack">
+                <div class="dog-side-panel">
+                    <span class="dog-panel-kicker">Trending Flow</span>
+                    <h2>Search, edit, and view dog profiles from one futuristic dashboard.</h2>
+                </div>
+
+                <div class="dog-metric-grid">
+                    <div class="dog-metric-card">
+                        <span class="dog-metric-value">24/7</span>
+                        <span class="dog-metric-label">Profile Access</span>
+                    </div>
+                    <div class="dog-metric-card">
+                        <span class="dog-metric-value">HD</span>
+                        <span class="dog-metric-label">Image Support</span>
+                    </div>
+                    <div class="dog-metric-card">
+                        <span class="dog-metric-value">Fast</span>
+                        <span class="dog-metric-label">CRUD Flow</span>
+                    </div>
+                    <div class="dog-metric-card">
+                        <span class="dog-metric-value">Live</span>
+                        <span class="dog-metric-label">Search Feel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

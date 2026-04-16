@@ -1,0 +1,65 @@
+@model UniversityCourseApp.Models.StudentDetailVM
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<section class="hero-panel page-intro">
+    <div>
+        <span class="eyebrow">Student profile</span>
+        <h1 class="page-title">@Model.Name</h1>
+        <p class="page-subtitle">
+            Branch: <strong>@Model.Branch</strong>
+        </p>
+    </div>
+    <div class="stats-chip">
+        <span class="stats-value">@Model.Courses.Count</span>
+        <span class="stats-label">Active Courses</span>
+    </div>
+</section>
+
+<section class="content-card">
+    <div class="section-header">
+        <div>
+            <h2 class="section-title">Course Performance</h2>
+            <p class="section-copy">Latest attempts are shown for each course to keep the summary accurate.</p>
+        </div>
+        <a class="secondary-link" asp-action="Index">Back to Dashboard</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table modern-table">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Credits</th>
+                    <th>Department</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Courses.Any())
+                {
+                    @foreach (var course in Model.Courses)
+                    {
+                        <tr>
+                            <td>@course.Title</td>
+                            <td>@course.Credits</td>
+                            <td>@course.Department</td>
+                            <td>
+                                <span class="grade-chip">@course.LatestGrade</span>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="empty-table">No course records available for this student.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

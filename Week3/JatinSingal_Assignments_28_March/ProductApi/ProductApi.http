@@ -1,0 +1,17 @@
+@ProductApi_HostAddress = http://localhost:5058
+
+GET {{ProductApi_HostAddress}}/api/products
+Accept: application/json
+
+###
+
+POST {{ProductApi_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Keyboard",
+  "price": 899.00,
+  "category": "Accessories"
+}
+
+###

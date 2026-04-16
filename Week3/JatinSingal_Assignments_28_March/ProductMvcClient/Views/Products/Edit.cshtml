@@ -1,0 +1,46 @@
+@model ProductMvcClient.Models.ProductViewModel
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<section class="form-shell">
+    <div class="section-title">
+        <div>
+            <h1 class="h3 mb-1">Edit Product</h1>
+            <p class="text-secondary mb-0">Update the selected product and send changes to the Web API.</p>
+        </div>
+        <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
+    </div>
+
+    <form asp-action="Edit" method="post" class="row g-3">
+        <input asp-for="Id" type="hidden" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-md-6">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Category" class="form-label"></label>
+            <input asp-for="Category" class="form-control" />
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Update Product</button>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

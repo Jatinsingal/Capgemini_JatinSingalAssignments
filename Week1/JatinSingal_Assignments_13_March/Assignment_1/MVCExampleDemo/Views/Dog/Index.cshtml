@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MVCExampleDemo.Models.Dog>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+                <td>
+                    @Html.ActionLink("EditLink", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("DetailsLink", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("DeleteLink", "Delete", new { id = item.ID }) |
+                    @Html.ActionLink("DirectDeleteLink", "DirectDelete", new { id = item.ID })
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
