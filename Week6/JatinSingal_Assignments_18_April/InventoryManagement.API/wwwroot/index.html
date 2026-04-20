@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <div class="page-orb page-orb-one"></div>
+    <div class="page-orb page-orb-two"></div>
+
+    <main class="page-shell">
+        <section class="auth-view" id="authView">
+            <div class="auth-hero">
+                <span class="eyebrow">Inventory Workspace</span>
+                <h1>Control stock, customers, and orders from one focused dashboard.</h1>
+                <p>
+                    A clean, self-contained inventory system with no external frontend dependency,
+                    role-aware product control, quick customer management, and live order history.
+                </p>
+
+                <div class="hero-points">
+                    <article class="info-chip">
+                        <span class="info-chip-label">Stock clarity</span>
+                        <strong>Track quantity, value, and low-stock items instantly.</strong>
+                    </article>
+                    <article class="info-chip">
+                        <span class="info-chip-label">Customer flow</span>
+                        <strong>Add and maintain customer records without leaving the dashboard.</strong>
+                    </article>
+                    <article class="info-chip">
+                        <span class="info-chip-label">Order desk</span>
+                        <strong>Place multi-item orders and keep recent transactions visible.</strong>
+                    </article>
+                </div>
+            </div>
+
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="loginTab" type="button">Sign In</button>
+                    <button class="auth-tab" id="registerTab" type="button">Create Account</button>
+                </div>
+
+                <p class="auth-copy" id="authCopy">Use your account to open the inventory workspace.</p>
+
+                <form id="authForm" class="auth-form">
+                    <div class="field-grid">
+                        <label class="field" id="usernameField" hidden>
+                            <span>Full Name</span>
+                            <input type="text" id="username" placeholder="Enter your full name">
+                        </label>
+
+                        <label class="field">
+                            <span>Email</span>
+                            <input type="email" id="email" placeholder="Enter your email" required>
+                        </label>
+
+                        <label class="field">
+                            <span>Password</span>
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                        </label>
+
+                        <label class="field" id="mobileField" hidden>
+                            <span>Mobile Number</span>
+                            <input type="tel" id="mobileNumber" placeholder="Enter mobile number">
+                        </label>
+
+                        <label class="field" id="roleField" hidden>
+                            <span>Role</span>
+                            <select id="userRole">
+                                <option value="Admin">Admin</option>
+                                <option value="InventoryManager">Inventory Manager</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <button class="primary-action" id="authSubmit" type="submit">Sign In</button>
+                </form>
+
+                <p class="auth-note">
+                    This project stays self-contained in your app and uses the same server origin for all frontend requests.
+                </p>
+            </div>
+        </section>
+
+        <section class="app-view hidden" id="appView">
+            <aside class="sidebar">
+                <div class="brand-panel">
+                    <span class="eyebrow">Inventory Management</span>
+                    <h2>Operations Console</h2>
+                    <p>Professional control for products, customers, and orders.</p>
+                </div>
+
+                <nav class="nav-links">
+                    <button class="nav-link active" type="button" data-target="overviewSection">Overview</button>
+                    <button class="nav-link" type="button" data-target="productsSection">Products</button>
+                    <button class="nav-link" type="button" data-target="customersSection">Customers</button>
+                    <button class="nav-link" type="button" data-target="ordersSection">Orders</button>
+                </nav>
+
+                <div class="profile-card">
+                    <div>
+                        <span class="profile-label">Signed in as</span>
+                        <strong id="profileName">User</strong>
+                    </div>
+                    <span class="role-badge" id="profileRole">Role</span>
+                </div>
+
+                <button class="secondary-action full-width" id="logoutButton" type="button">Logout</button>
+            </aside>
+
+            <div class="main-panel">
+                <header class="topbar">
+                    <div>
+                        <span class="eyebrow">Workspace</span>
+                        <h1>Inventory command center</h1>
+                        <p id="welcomeText">Review stock movement, customer activity, and recent orders.</p>
+                    </div>
+                    <button class="secondary-action" id="refreshButton" type="button">Refresh Data</button>
+                </header>
+
+                <section class="section-block" id="overviewSection">
+                    <div class="section-heading">
+                        <div>
+                            <span class="eyebrow">Overview</span>
+                            <h3>Business snapshot</h3>
+                        </div>
+                        <p class="section-copy">A quick read on stock health, revenue movement, and team-ready activity.</p>
+                    </div>
+
+                    <div class="stats-grid" id="statsGrid"></div>
+
+                    <div class="insight-grid">
+                        <article class="panel-card">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">Inventory pulse</span>
+                                    <h4>Low stock watch</h4>
+                                </div>
+                            </div>
+                            <div id="lowStockList" class="stack-list"></div>
+                        </article>
+
+                        <article class="panel-card">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">Orders</span>
+                                    <h4>Recent activity</h4>
+                                </div>
+                            </div>
+                            <div id="recentOrdersList" class="stack-list"></div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="section-block" id="productsSection">
+                    <div class="section-heading">
+                        <div>
+                            <span class="eyebrow">Inventory</span>
+                            <h3>Products</h3>
+                        </div>
+                        <p class="section-copy">Maintain your catalog with pricing, stock visibility, and fast edits.</p>
+                    </div>
+
+                    <div class="module-grid">
+                        <article class="panel-card">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">Catalog</span>
+                                    <h4>Product table</h4>
+                                </div>
+                            </div>
+                            <div class="table-wrapper">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="productsTableBody"></tbody>
+                                </table>
+                            </div>
+                        </article>
+
+                        <article class="panel-card">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">Product editor</span>
+                                    <h4 id="productFormHeading">Add product</h4>
+                                </div>
+                            </div>
+                            <form id="productForm" class="editor-form">
+                                <input type="hidden" id="productId">
+                                <label class="field">
+                                    <span>Product name</span>
+                                    <input type="text" id="productName" placeholder="Product name" required>
+                                </label>
+                                <label class="field">
+                                    <span>Description</span>
+                                    <textarea id="productDescription" rows="4" placeholder="Describe the product"></textarea>
+                                </label>
+                                <div class="split-fields">
+                                    <label class="field">
+                                        <span>Price</span>
+                                        <input type="number" id="productPrice" min="1" step="0.01" placeholder="0.00" required>
+                                    </label>
+                                    <label class="field">
+                                        <span>Quantity</span>
+                                        <input type="number" id="productQuantity" min="0" step="1" placeholder="0" required>
+                                    </label>
+                                </div>
+                                <div class="action-row">
+                                    <button class="primary-action" id="productSubmitButton" type="submit">Save Product</button>
+                                    <button class="ghost-action hidden" id="productCancelButton" type="button">Cancel</button>
+                                </div>
+                                <p class="muted-note" id="productPermissionNote"></p>
+                            </form>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="section-block" id="customersSection">
+                    <div class="section-heading">
+                        <div>
+                            <span class="eyebrow">Customers</span>
+                            <h3>Customer records</h3>
+                        </div>
+                        <p class="section-copy">Keep contact data organized so order handling stays fast and accurate.</p>
+                    </div>
+
+                    <div class="module-grid">
+                        <article class="panel-card">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">Directory</span>
+                                    <h4>Customer table</h4>
+                                </div>
+                            </div>
+                            <div class="table-wrapper">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Address</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="customersTableBody"></tbody>
+                                </table>
+                            </div>
+                        </article>
+
+                        <article class="panel-card">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">Customer editor</span>
+                                    <h4 id="customerFormHeading">Add customer</h4>
+                                </div>
+                            </div>
+                            <form id="customerForm" class="editor-form">
+                                <input type="hidden" id="customerId">
+                                <label class="field">
+                                    <span>Customer name</span>
+                                    <input type="text" id="customerName" placeholder="Customer name" required>
+                                </label>
+                                <label class="field">
+                                    <span>Email</span>
+                                    <input type="email" id="customerEmail" placeholder="Customer email">
+                                </label>
+                                <label class="field">
+                                    <span>Phone</span>
+                                    <input type="tel" id="customerPhone" placeholder="Phone number">
+                                </label>
+                                <label class="field">
+                                    <span>Address</span>
+                                    <textarea id="customerAddress" rows="4" placeholder="Customer address"></textarea>
+                                </label>
+                                <div class="action-row">
+                                    <button class="primary-action" type="submit">Save Customer</button>
+                                    <button class="ghost-action hidden" id="customerCancelButton" type="button">Cancel</button>
+                                </div>
+                            </form>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="section-block" id="ordersSection">
+                    <div class="section-heading">
+                        <div>
+                            <span class="eyebrow">Orders</span>
+                            <h3>Order desk</h3>
+                        </div>
+                        <p class="section-copy">Create multi-line orders and review transaction history in one place.</p>
+                    </div>
+
+                    <div class="module-grid wide-layout">
+                        <article class="panel-card">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">New order</span>
+                                    <h4>Build order</h4>
+                                </div>
+                                <button class="ghost-action" id="addOrderLineButton" type="button">Add line</button>
+                            </div>
+
+                            <form id="orderForm" class="editor-form">
+                                <label class="field">
+                                    <span>Customer</span>
+                                    <select id="orderCustomer" required></select>
+                                </label>
+                                <div id="orderLines" class="order-lines"></div>
+                                <div class="order-summary">
+                                    <div>
+                                        <span class="summary-label">Estimated total</span>
+                                        <strong id="orderTotalValue">Rs. 0.00</strong>
+                                    </div>
+                                    <button class="primary-action" type="submit">Place Order</button>
+                                </div>
+                            </form>
+                        </article>
+
+                        <article class="panel-card">
+                            <div class="panel-header">
+                                <div>
+                                    <span class="eyebrow">History</span>
+                                    <h4>Recent orders</h4>
+                                </div>
+                            </div>
+                            <div id="ordersList" class="orders-list"></div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast hidden" id="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
