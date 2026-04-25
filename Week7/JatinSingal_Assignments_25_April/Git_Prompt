@@ -1,0 +1,117 @@
+
+jatin@Jatin MINGW64 ~
+$ cd d:
+
+jatin@Jatin MINGW64 /d
+$ git clone https://github.com/Jatinsingal/website5.git
+Cloning into 'website5'...
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 9 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (9/9), done.
+
+jatin@Jatin MINGW64 /d
+$ cd website5
+
+jatin@Jatin MINGW64 /d/website5 (main)
+$ git branch
+* main
+
+jatin@Jatin MINGW64 /d/website5 (main)
+$ git branch -r
+  origin/HEAD -> origin/main
+  origin/animal
+  origin/cartoons
+  origin/main
+
+jatin@Jatin MINGW64 /d/website5 (main)
+$ git switch animal
+branch 'animal' set up to track 'origin/animal'.
+Switched to a new branch 'animal'
+
+jatin@Jatin MINGW64 /d/website5 (animal)
+$ code .
+
+jatin@Jatin MINGW64 /d/website5 (animal)
+$ git switch cartoons
+branch 'cartoons' set up to track 'origin/cartoons'.
+Switched to a new branch 'cartoons'
+
+jatin@Jatin MINGW64 /d/website5 (cartoons)
+$ code .
+
+jatin@Jatin MINGW64 /d/website5 (cartoons)
+$ git fetch
+
+jatin@Jatin MINGW64 /d/website5 (cartoons)
+$ ^C
+
+jatin@Jatin MINGW64 /d/website5 (cartoons)
+$ ^[[200~git branch -r
+bash: $'\E[200~git': command not found
+
+jatin@Jatin MINGW64 /d/website5 (cartoons)
+$ git branch -r
+  origin/HEAD -> origin/main
+  origin/animal
+  origin/cartoons
+  origin/main
+
+jatin@Jatin MINGW64 /d/website5 (cartoons)
+$ git fetch
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 1.02 KiB | 61.00 KiB/s, done.
+From https://github.com/Jatinsingal/website5
+ * [new branch]      Clothing   -> origin/Clothing
+
+jatin@Jatin MINGW64 /d/website5 (cartoons)
+$ git branch -r
+  origin/Clothing
+  origin/HEAD -> origin/main
+  origin/animal
+  origin/cartoons
+  origin/main
+
+jatin@Jatin MINGW64 /d/website5 (cartoons)
+$ git switch main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+jatin@Jatin MINGW64 /d/website5 (main)
+$ git pull origin clothing
+fatal: couldn't find remote ref clothing
+
+jatin@Jatin MINGW64 /d/website5 (main)
+$ git pull origin clothing From https://github.com/Jatinsingal/website5.git
+fatal: invalid refspec 'https://github.com/Jatinsingal/website5.git'
+
+jatin@Jatin MINGW64 /d/website5 (main)
+$ git fetch
+remote: Enumerating objects: 10, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (6/6), 2.05 KiB | 84.00 KiB/s, done.
+From https://github.com/Jatinsingal/website5
+   ac321b7..22bbf55  main       -> origin/main
+   cd8e94c..f03ca90  animal     -> origin/animal
+
+jatin@Jatin MINGW64 /d/website5 (main)
+$ git pull origin animal
+From https://github.com/Jatinsingal/website5
+ * branch            animal     -> FETCH_HEAD
+Updating ac321b7..f03ca90
+Fast-forward
+ camel.txt | 29 +++++++++++++++++++++++++++++
+ dolphin   | 14 ++++++++++++++
+ 2 files changed, 43 insertions(+)
+ create mode 100644 camel.txt
+ create mode 100644 dolphin
+
+jatin@Jatin MINGW64 /d/website5 (main)
+$ code .
+
